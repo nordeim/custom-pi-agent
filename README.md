@@ -3,69 +3,47 @@
     <img alt="pi logo" src="https://pi.dev/logo-auto.svg" width="128">
   </a>
 </p>
+
 <p align="center">
-  <a href="https://discord.com/invite/3cU7Bz4UPx"><img alt="Discord" src="https://img.shields.io/badge/discord-community-5865F2?style=flat-square&logo=discord&logoColor=white" /></a>
-  <a href="https://www.npmjs.com/package/@earendil-works/pi-coding-agent"><img alt="npm" src="https://img.shields.io/npm/v/@earendil-works/pi-coding-agent?style=flat-square" /></a>
+  <a href="https://www.npmjs.com/package/@earendil-works/pi-coding-agent"><img alt="npm" src="https://img.shields.io/npm/v/@earendil-works/pi-coding-agent?style=flat-square"></a>
+  <a href="https://github.com/earendil-works/pi/actions/workflows/ci.yml"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/earendil-works/pi/ci.yml?branch=main&style=flat-square&label=CI"></a>
+  <a href="https://github.com/earendil-works/pi/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/npm/l/@earendil-works/pi-coding-agent?style=flat-square"></a>
+  <a href="https://discord.com/invite/3cU7Bz4UPx"><img alt="Discord" src="https://img.shields.io/badge/discord-community-5865F2?style=flat-square&logo=discord&logoColor=white"></a>
 </p>
+
+<p align="center">
+  <a href="https://github.com/earendil-works/pi/releases"><img alt="macOS" src="https://img.shields.io/badge/macOS-ARM64%20%7C%20x64-333?style=flat-square&logo=apple&logoColor=white"></a>
+  <a href="https://github.com/earendil-works/pi/releases"><img alt="Linux" src="https://img.shields.io/badge/Linux-ARM64%20%7C%20x64-FCC624?style=flat-square&logo=linux&logoColor=black"></a>
+  <a href="https://github.com/earendil-works/pi/releases"><img alt="Windows" src="https://img.shields.io/badge/Windows-ARM64%20%7C%20x64-0078D6?style=flat-square&logo=windows&logoColor=white"></a>
+</p>
+
 <p align="center">
   <a href="https://pi.dev">pi.dev</a> domain graciously donated by
-  <br /><br />
-  <a href="https://exe.dev"><img src="docs/images/exy.png" alt="Exy mascot" width="48" /><br />exe.dev</a>
+  <br>
+  <a href="https://exe.dev"><img src="docs/images/exy.png" alt="Exy mascot" width="48"><br>exe.dev</a>
 </p>
 
 > New issues and PRs from new contributors are auto-closed by default. Maintainers review auto-closed issues daily. See [CONTRIBUTING.md](../../CONTRIBUTING.md).
 
 ---
 
-Pi is a minimal terminal coding harness. Adapt pi to your workflows, not the other way around, without having to fork and modify pi internals. Extend it with TypeScript [Extensions](#extensions), [Skills](#skills), [Prompt Templates](#prompt-templates), and [Themes](#themes). Put your extensions, skills, prompt templates, and themes in [Pi Packages](#pi-packages) and share them with others via npm or git.
+Pi is a minimal terminal coding harness. Adapt pi to your workflows, not the other way around, without having to fork and modify pi internals.
 
-Pi ships with powerful defaults but skips features like sub agents and plan mode. Instead, you can ask pi to build what you want or install a third party pi package that matches your workflow.
+It gives LLMs four built-in tools (`read`, `write`, `edit`, `bash`), connects to 30+ LLM providers, and runs in four modes (interactive TUI, print, JSON events, RPC). Extend it with TypeScript extensions, skills, prompt templates, and themes. Bundle and share them as pi packages via npm or git.
 
-Pi runs in four modes: interactive, print or JSON, RPC for process integration, and an SDK for embedding in your own apps. See [openclaw/openclaw](https://github.com/openclaw/openclaw) for a real-world SDK integration.
+Pi ships with powerful defaults but intentionally leaves out sub-agents, plan mode, and MCP. Instead, you build what you need with extensions, skills, or third-party packages.
 
-## Share your OSS coding agent sessions
+## Share Your OSS Coding Agent Sessions
 
-If you use pi for open source work, please share your coding agent sessions.
+If you use pi for open source work, please share your sessions using [`badlogic/pi-share-hf`](https://github.com/badlogic/pi-share-hf). Public OSS session data helps improve models, prompts, tools, and evaluations with real-world workflows instead of toy benchmarks.
 
-Public OSS session data helps improve models, prompts, tools, and evaluations using real development workflows.
-
-For the full explanation, see [this post on X](https://x.com/badlogicgames/status/2037811643774652911).
-
-To publish sessions, use [`badlogic/pi-share-hf`](https://github.com/badlogic/pi-share-hf). Read its README.md for setup instructions. All you need is a Hugging Face account, the Hugging Face CLI, and `pi-share-hf`.
-
-You can also watch [this video](https://x.com/badlogicgames/status/2041151967695634619), where I show how I publish my `pi-mono` sessions.
-
-I regularly publish my own `pi-mono` work sessions here:
-
-- [badlogicgames/pi-mono on Hugging Face](https://huggingface.co/datasets/badlogicgames/pi-mono)
-
-## Table of Contents
-
-- [Quick Start](#quick-start)
-- [Providers & Models](#providers--models)
-- [Interactive Mode](#interactive-mode)
-  - [Editor](#editor)
-  - [Commands](#commands)
-  - [Keyboard Shortcuts](#keyboard-shortcuts)
-  - [Message Queue](#message-queue)
-- [Sessions](#sessions)
-  - [Branching](#branching)
-  - [Compaction](#compaction)
-- [Settings](#settings)
-- [Context Files](#context-files)
-- [Customization](#customization)
-  - [Prompt Templates](#prompt-templates)
-  - [Skills](#skills)
-  - [Extensions](#extensions)
-  - [Themes](#themes)
-  - [Pi Packages](#pi-packages)
-- [Programmatic Usage](#programmatic-usage)
-- [Philosophy](#philosophy)
-- [CLI Reference](#cli-reference)
+[Explanation on X](https://x.com/badlogicgames/status/2037811643774652911) | [pi-mono sessions on HF](https://huggingface.co/datasets/badlogicgames/pi-mono)
 
 ---
 
 ## Quick Start
+
+**1. Install**
 
 ```bash
 npm install -g --ignore-scripts @earendil-works/pi-coding-agent
@@ -73,76 +51,89 @@ npm install -g --ignore-scripts @earendil-works/pi-coding-agent
 
 `--ignore-scripts` disables dependency lifecycle scripts during install. Pi does not require install scripts for normal npm installs.
 
-Installer alternative:
+Linux/macOS alternative:
 
 ```bash
 curl -fsSL https://pi.dev/install.sh | sh
 ```
 
-Authenticate with an API key:
+**2. Verify**
+
+```bash
+pi --version
+```
+
+**3. Authenticate**
+
+API key:
 
 ```bash
 export ANTHROPIC_API_KEY=sk-ant-...
-pi
 ```
 
-Or use your existing subscription:
+Or subscription login (run pi, then `/login`):
 
 ```bash
 pi
-/login  # Then select provider
+/login
 ```
 
-Then just talk to pi. By default, pi gives the model four tools: `read`, `write`, `edit`, and `bash`. The model uses these to fulfill your requests. Add capabilities via [skills](#skills), [prompt templates](#prompt-templates), [extensions](#extensions), or [pi packages](#pi-packages).
+**4. Run**
 
-**Platform notes:** [Windows](docs/windows.md) | [Termux (Android)](docs/termux.md) | [tmux](docs/tmux.md) | [Terminal setup](docs/terminal-setup.md) | [Shell aliases](docs/shell-aliases.md)
+```bash
+cd /path/to/project
+pi "Summarize this repository and tell me how to run its checks."
+```
+
+By default, pi gives the model four tools: `read`, `write`, `edit`, and `bash`. The model uses these to fulfill your requests.
+
+| Platform | Docs |
+|----------|------|
+| Windows | [docs/windows.md](docs/windows.md) |
+| Termux (Android) | [docs/termux.md](docs/termux.md) |
+| tmux | [docs/tmux.md](docs/tmux.md) |
+| Terminal setup | [docs/terminal-setup.md](docs/terminal-setup.md) |
+| Shell aliases | [docs/shell-aliases.md](docs/shell-aliases.md) |
 
 ---
 
-## Providers & Models
+## Key Features
 
-For each built-in provider, pi maintains a list of tool-capable models, updated with every release. Authenticate via subscription (`/login`) or API key, then select any model from that provider via `/model` (or Ctrl+L).
+| | Feature | Description |
+|---|---|---|
+| :electric_plug: | Extensible Core | TypeScript extensions, skills, prompt templates, themes, pi packages |
+| :globe_with_meridians: | 30+ LLM Providers | Anthropic, OpenAI, Google, Bedrock, Mistral, Groq, GitHub Copilot, xAI, and more |
+| :computer: | 4 Run Modes | Interactive TUI, print (`-p`), JSON events (`--mode json`), RPC (`--mode rpc`) |
+| :twisted_rightwards_arrows: | Session Management | JSONL persistence, branching, forking, cloning, compaction, tree navigation |
+| :art: | Customizable TUI | Themes (hot-reloadable), inline images, custom editors, widgets, footers |
+| :lock: | Project Trust | Explicit gate for project-local instructions, settings, and extensions |
 
-**Subscriptions:**
-- Anthropic Claude Pro/Max
-- OpenAI ChatGPT Plus/Pro (Codex)
-- GitHub Copilot
+---
 
-**API keys:**
-- Anthropic
-- Ant Ling
-- OpenAI
-- Azure OpenAI
-- DeepSeek
-- NVIDIA NIM
-- Google Gemini
-- Google Vertex
-- Amazon Bedrock
-- Mistral
-- Groq
-- Cerebras
-- Cloudflare AI Gateway
-- Cloudflare Workers AI
-- xAI
-- OpenRouter
-- Vercel AI Gateway
-- ZAI
-- ZAI Coding Plan (China)
-- OpenCode Zen
-- OpenCode Go
-- Hugging Face
-- Fireworks
-- Together AI
-- Kimi For Coding
-- MiniMax
-- Xiaomi MiMo
-- Xiaomi MiMo Token Plan (China)
-- Xiaomi MiMo Token Plan (Amsterdam)
-- Xiaomi MiMo Token Plan (Singapore)
+## Architecture
 
-See [docs/providers.md](docs/providers.md) for detailed setup instructions.
+Pi is the top-level package in the pi-monorepo. It depends on three sibling packages:
 
-**Custom providers & models:** Add providers via `~/.pi/agent/models.json` if they speak a supported API (OpenAI, Anthropic, Google). For custom APIs or OAuth, use extensions. See [docs/models.md](docs/models.md) and [docs/custom-provider.md](docs/custom-provider.md).
+| Layer | Package | Role |
+|-------|---------|------|
+| CLI | `@earendil-works/pi-coding-agent` | Main product: coding agent CLI with tools, sessions, extensions |
+| Agent | `@earendil-works/pi-agent-core` | Agent loop, tool execution, event streaming, steering/follow-up queues |
+| AI | `@earendil-works/pi-ai` | Unified multi-provider LLM API, model registry, image generation, OAuth |
+| TUI | `@earendil-works/pi-tui` | Terminal UI with differential rendering, synchronized output, components |
+
+```mermaid
+flowchart TB
+    TUI["@earendil-works/pi-tui<br/>Terminal UI Components"]
+    AI["@earendil-works/pi-ai<br/>Unified LLM API"]
+    AGENT["@earendil-works/pi-agent-core<br/>Agent Runtime"]
+    CLI["@earendil-works/pi-coding-agent<br/>Coding Agent CLI"]
+
+    TUI --> CLI
+    AI --> AGENT
+    AGENT --> CLI
+```
+
+**Tech stack**: Node.js 22.19+ (Bun binary distribution for 6 platforms), TypeScript strict, `tsgo` compiler (`@typescript/native-preview`), Biome 2.3.5 linting/formatting, Vitest 3.2.4 testing.
 
 ---
 
@@ -152,28 +143,22 @@ See [docs/providers.md](docs/providers.md) for detailed setup instructions.
 
 The interface from top to bottom:
 
-- **Startup header** - Shows shortcuts (`/hotkeys` for all), loaded AGENTS.md files, prompt templates, skills, and extensions
-- **Messages** - Your messages, assistant responses, tool calls and results, notifications, errors, and extension UI
-- **Editor** - Where you type; border color indicates thinking level
-- **Footer** - Working directory, session name, total token/cache usage (`↑` input, `↓` output, `R` cache read, `W` cache write, `CH` latest cache hit rate), cost, context usage, current model
-
-The editor can be temporarily replaced by other UI, like built-in `/settings` or custom UI from extensions (e.g., a Q&A tool that lets the user answer model questions in a structured format). [Extensions](#extensions) can also replace the editor, add widgets above/below it, a status line, custom footer, or overlays.
+- **Startup header** — shortcuts, loaded AGENTS.md files, prompt templates, skills, extensions
+- **Messages** — user prompts, assistant responses, tool calls and results, notifications, extension UI
+- **Editor** — where you type; border color indicates thinking level
+- **Footer** — working directory, session name, token/cache usage, cost, context %, current model
 
 ### Editor
 
 | Feature | How |
-|---------|-----|
+|---------|------|
 | File reference | Type `@` to fuzzy-search project files |
-| Path completion | Tab to complete paths |
-| Multi-line | Shift+Enter (or Ctrl+Enter on Windows Terminal) |
-| Images | Ctrl+V to paste (Alt+V on Windows), or drag onto terminal |
-| Bash commands | `!command` runs and sends output to LLM, `!!command` runs without sending |
+| Path completion | Tab |
+| Multi-line | Shift+Enter |
+| Images | Ctrl+V (Alt+V on Windows), or drag onto terminal |
+| Bash commands | `!command` runs and sends output to LLM; `!!command` runs without sending |
 
-Standard editing keybindings for delete word, undo, etc. See [docs/keybindings.md](docs/keybindings.md).
-
-### Commands
-
-Type `/` in the editor to trigger commands. [Extensions](#extensions) can register custom commands, [skills](#skills) are available as `/skill:name`, and [prompt templates](#prompt-templates) expand via `/templatename`.
+### Slash Commands
 
 | Command | Description |
 |---------|-------------|
@@ -183,26 +168,19 @@ Type `/` in the editor to trigger commands. [Extensions](#extensions) can regist
 | `/settings` | Thinking level, theme, message delivery, transport |
 | `/resume` | Pick from previous sessions |
 | `/new` | Start a new session |
-| `/name <name>` | Set session display name |
-| `/session` | Show session info (file, ID, messages, tokens, cost) |
-| `/tree` | Jump to any point in the session and continue from there |
-| `/trust` | Save project trust decision for future sessions (restart required) |
+| `/session` | Show session info |
+| `/tree` | Jump to any point in the session tree |
+| `/trust` | Save project trust decision |
 | `/fork` | Create a new session from a previous user message |
-| `/clone` | Duplicate the current active branch into a new session |
-| `/compact [prompt]` | Manually compact context, optional custom instructions |
-| `/copy` | Copy last assistant message to clipboard |
-| `/export [file]` | Export session to HTML file |
-| `/share` | Upload as private GitHub gist with shareable HTML link |
-| `/reload` | Reload keybindings, extensions, skills, prompts, and context files (themes hot-reload automatically) |
+| `/clone` | Duplicate current active branch into a new session |
+| `/compact [prompt]` | Manually compact context |
+| `/export [file]` | Export session to HTML |
+| `/share` | Upload as private GitHub gist |
+| `/reload` | Reload keybindings, extensions, skills, prompts, context files |
 | `/hotkeys` | Show all keyboard shortcuts |
-| `/changelog` | Display version history |
 | `/quit` | Quit pi |
 
 ### Keyboard Shortcuts
-
-See `/hotkeys` for the full list. Customize via `~/.pi/agent/keybindings.json`. See [docs/keybindings.md](docs/keybindings.md).
-
-**Commonly used:**
 
 | Key | Action |
 |-----|--------|
@@ -211,7 +189,7 @@ See `/hotkeys` for the full list. Customize via `~/.pi/agent/keybindings.json`. 
 | Escape | Cancel/abort |
 | Escape twice | Open `/tree` |
 | Ctrl+L | Open model selector |
-| Ctrl+P / Shift+Ctrl+P | Cycle scoped models forward/backward |
+| Ctrl+P / Shift+Ctrl+P | Cycle scoped models |
 | Shift+Tab | Cycle thinking level |
 | Ctrl+O | Collapse/expand tool output |
 | Ctrl+T | Collapse/expand thinking blocks |
@@ -220,93 +198,181 @@ See `/hotkeys` for the full list. Customize via `~/.pi/agent/keybindings.json`. 
 
 Submit messages while the agent is working:
 
-- **Enter** queues a *steering* message, delivered after the current assistant turn finishes executing its tool calls
-- **Alt+Enter** queues a *follow-up* message, delivered only after the agent finishes all work
+- **Enter** queues a *steering* message (delivered after current tool calls finish)
+- **Alt+Enter** queues a *follow-up* message (delivered after agent finishes all work)
 - **Escape** aborts and restores queued messages to editor
-- **Alt+Up** retrieves queued messages back to editor
 
-On Windows Terminal, `Alt+Enter` is fullscreen by default. Remap it in [docs/terminal-setup.md](docs/terminal-setup.md) so pi can receive the follow-up shortcut.
-
-Configure delivery in [settings](docs/settings.md): `steeringMode` and `followUpMode` can be `"one-at-a-time"` (default, waits for response) or `"all"` (delivers all queued at once). `transport` selects provider transport preference (`"sse"`, `"websocket"`, or `"auto"`) for providers that support multiple transports.
+See [docs/settings.md](docs/settings.md) for delivery mode configuration.
 
 ---
 
 ## Sessions
 
-Sessions are stored as JSONL files with a tree structure. Each entry has an `id` and `parentId`, enabling in-place branching without creating new files. See [docs/session-format.md](docs/session-format.md) for file format.
-
-### Management
-
-Sessions auto-save to `~/.pi/agent/sessions/` organized by working directory.
+Sessions auto-save to `~/.pi/agent/sessions/` as JSONL files with a tree structure. Each entry has an `id` and `parentId`, enabling in-place branching.
 
 ```bash
 pi -c                  # Continue most recent session
 pi -r                  # Browse and select from past sessions
-pi --no-session        # Ephemeral mode (don't save)
 pi --name "my task"    # Set session display name at startup
-pi --session <path|id> # Use specific session file or ID
-pi --fork <path|id>    # Fork specific session file or ID into a new session
+pi --session <path|id> # Use specific session file
+pi --fork <path|id>    # Fork a session into a new file
+pi --no-session        # Ephemeral mode (don't save)
 ```
-
-Use `/session` in interactive mode to see the current session ID before reusing it with `--session <id>` or `--fork <id>`.
 
 ### Branching
 
-**`/tree`** - Navigate the session tree in-place. Select any previous point, continue from there, and switch between branches. All history preserved in a single file.
+**`/tree`** — Navigate the session tree in-place. Select any previous point, continue from there, switch between branches. All history preserved in a single file.
 
 <p align="center"><img src="docs/images/tree-view.png" alt="Tree View" width="600"></p>
 
-- Search by typing, fold/unfold and jump between branches with Ctrl+←/Ctrl+→ or Alt+←/Alt+→, page with ←/→
-- Filter modes (Ctrl+O): default → no-tools → user-only → labeled-only → all
-- Press Shift+L to label entries as bookmarks and Shift+T to toggle label timestamps
+- Search by typing, fold/unfold and jump between branches
+- Filter modes: default, no-tools, user-only, labeled-only, all
+- Shift+L to label entries as bookmarks
 
-**`/fork`** - Create a new session file from a previous user message on the active branch. Opens a selector, copies the active path up to that point, and places the selected prompt in the editor for modification.
+**`/fork`** — Create a new session file from a previous user message on the active branch.
 
-**`/clone`** - Duplicate the current active branch into a new session file at the current position. The new session keeps the full active-path history and opens with an empty editor.
-
-**`--fork <path|id>`** - Fork an existing session file or partial session UUID directly from the CLI. This copies the full source session into a new session file in the current project.
+**`/clone`** — Duplicate the current active branch into a new session file.
 
 ### Compaction
 
-Long sessions can exhaust context windows. Compaction summarizes older messages while keeping recent ones.
+Long sessions can exhaust context windows. Compaction summarizes older messages while keeping recent ones. Automatic by default (triggers on overflow or proactively near the limit). Manual via `/compact` or `/compact <custom instructions>`.
 
-**Manual:** `/compact` or `/compact <custom instructions>`
+Compaction is lossy. The full history remains in the JSONL file; use `/tree` to revisit.
 
-**Automatic:** Enabled by default. Triggers on context overflow (recovers and retries) or when approaching the limit (proactive). Configure via `/settings` or `settings.json`.
+See [docs/sessions.md](docs/sessions.md), [docs/session-format.md](docs/session-format.md), and [docs/compaction.md](docs/compaction.md).
 
-Compaction is lossy. The full history remains in the JSONL file; use `/tree` to revisit. Customize compaction behavior via [extensions](#extensions). See [docs/compaction.md](docs/compaction.md) for internals.
+---
+
+## Providers & Models
+
+For each built-in provider, pi maintains a list of tool-capable models, updated with every release.
+
+**Subscriptions** (via `/login`):
+- Anthropic Claude Pro/Max
+- OpenAI ChatGPT Plus/Pro (Codex)
+- GitHub Copilot
+
+**API keys** (via env var or `/login`):
+- Anthropic, OpenAI, Azure OpenAI, DeepSeek, NVIDIA NIM
+- Google Gemini, Google Vertex, Amazon Bedrock
+- Mistral, Groq, Cerebras, xAI
+- OpenRouter, Vercel AI Gateway
+- Cloudflare (Workers AI, AI Gateway)
+- Fireworks, Together AI, Hugging Face
+- ZAI, ZAI Coding Plan (China)
+- OpenCode Zen, OpenCode Go
+- Kimi For Coding, MiniMax
+- Xiaomi MiMo (API billing + Token Plans for cn/ams/sgp)
+- Ant Ling
+
+See [docs/providers.md](docs/providers.md) for detailed setup.
+
+**Custom models and providers**: Add models via `~/.pi/agent/models.json` for APIs compatible with OpenAI, Anthropic, or Google. For custom APIs or OAuth, use extensions. See [docs/models.md](docs/models.md) and [docs/custom-provider.md](docs/custom-provider.md).
+
+---
+
+## Customization
+
+| System | Where | Format |
+|--------|-------|--------|
+| Extensions | `.pi/extensions/`, `~/.pi/agent/extensions/`, builtin/ | TypeScript, event-driven lifecycle hooks |
+| Skills | `.pi/skills/`, `~/.pi/agent/skills/`, `~/.agents/skills/` | SKILL.md + YAML frontmatter |
+| Prompt Templates | `.pi/prompts/`, `~/.pi/agent/prompts/` | Markdown + bash-style argument substitution |
+| Themes | `.pi/themes/`, `~/.pi/agent/themes/` | JSON (hot-reloadable on modify) |
+| Pi Packages | npm or git (via `pi install`) | Bundle extensions, skills, prompts, themes |
+
+### Extensions
+
+TypeScript modules that extend pi with custom tools, commands, keyboard shortcuts, event handlers, UI components, and provider integrations.
+
+```typescript
+export default function (pi: ExtensionAPI) {
+  pi.registerTool({ name: "deploy", description: "Deploy to production", parameters: Type.Object({...}) });
+  pi.registerCommand("stats", { description: "Show stats", handler: async (args, ctx) => { ... } });
+  pi.on("tool_call", async (event, ctx) => { ... });
+  pi.registerProvider("my-proxy", { baseUrl: "...", api: "anthropic-messages", models: [...] });
+}
+```
+
+**What's possible**: custom tools, sub-agents, plan mode, custom compaction, permission gates, custom editors/headers/footers, git checkpointing, MCP server integration, sandbox execution.
+
+76 example extensions in [examples/extensions/](examples/extensions/). See [docs/extensions.md](docs/extensions.md).
+
+### Skills
+
+On-demand capability packages following the [Agent Skills standard](https://agentskills.io). Invoke via `/skill:name` or let the model load them automatically.
+
+```markdown
+---
+name: code-review
+description: Review code for bugs and security issues
+---
+
+1. Read the files mentioned by the user
+2. Check for common vulnerabilities
+3. Summarize findings
+```
+
+See [docs/skills.md](docs/skills.md).
+
+### Prompt Templates
+
+Reusable prompts as Markdown files. Type `/name` to expand.
+
+```markdown
+---
+description: Review code focusing on a specific area
+argument-hint: focus area
+---
+
+Review this code for {{$1}} issues.
+```
+
+See [docs/prompt-templates.md](docs/prompt-templates.md).
+
+### Themes
+
+Built-in: `dark`, `light`. Themes hot-reload: modify the active file and pi immediately applies the changes. See [docs/themes.md](docs/themes.md).
+
+### Pi Packages
+
+Bundle and share extensions, skills, prompts, and themes via npm or git.
+
+```bash
+pi install npm:@foo/pi-tools            # npm package
+pi install npm:@foo/pi-tools@1.2.3      # pinned version
+pi install git:github.com/user/repo     # git repository
+pi install git:github.com/user/repo@v1  # pinned tag/commit
+pi install -l npm:@foo/pi-tools         # project-local (.pi/npm/)
+pi remove npm:@foo/pi-tools
+pi list
+pi update                               # update pi and packages
+pi update --self                        # update pi only
+pi config                               # enable/disable package resources
+```
+
+> **Security**: Pi packages run with full system access. Review source before installing third-party packages.
+
+Create a package by adding a `pi` key to `package.json`. Without a manifest, pi auto-discovers from conventional directories. See [docs/packages.md](docs/packages.md).
 
 ---
 
 ## Settings
-
-Use `/settings` to modify common options, or edit JSON files directly:
 
 | Location | Scope |
 |----------|-------|
 | `~/.pi/agent/settings.json` | Global (all projects) |
 | `.pi/settings.json` | Project (overrides global) |
 
-See [docs/settings.md](docs/settings.md) for all options.
+Use `/settings` to modify common options interactively. See [docs/settings.md](docs/settings.md) for all options.
 
-### Project Trust
+**Project Trust**: On interactive startup, pi asks before trusting a project folder that contains project-local inputs. Trusting allows pi to read `AGENTS.md`/`CLAUDE.md`, load `.pi/settings.json` and `.pi` resources, install project packages, and execute project extensions. Use `/trust` to save a decision, `--approve`/`-a` per run, or `--no-approve`/`-na` to ignore project-local inputs.
 
-On interactive startup, pi asks before trusting a project folder that contains project-local inputs and has no saved decision in `~/.pi/agent/trust.json`. Trusting a project allows pi to read project instructions (`AGENTS.md`/`CLAUDE.md`), load `.pi/settings.json` and `.pi` resources, install missing project packages, and execute project extensions.
+**Telemetry**: Two separate features:
+- **Update check** — fetches `pi.dev/api/latest-version`. Disable with `PI_SKIP_VERSION_CHECK=1`.
+- **Install/update telemetry** — anonymous version ping on first install or update. Also controls optional provider attribution headers. Opt out via `enableInstallTelemetry: false` in settings or `PI_TELEMETRY=0`.
 
-Non-interactive modes (`-p`, `--mode json`, and `--mode rpc`) do not show a trust prompt. Without a saved trust decision, they ignore project-local inputs unless `--approve`/`-a` is passed. Use `--no-approve`/`-na` to ignore project-local inputs for one run even when the project is trusted.
-
-`pi config` assumes project trust for that command so you can view and change project resource settings before starting a session. It does not save a trust decision; starting a session in that folder still prompts. Pass `--no-approve` to hide project-local inputs in `pi config`.
-
-Use `/trust` in interactive mode to save a project trust decision for future sessions. It writes `~/.pi/agent/trust.json` only; the current session is not reloaded, so restart pi for changes to take effect.
-
-### Telemetry and update checks
-
-Pi has two separate startup features:
-
-- **Update check:** fetches `https://pi.dev/api/latest-version` to check whether a newer Pi version exists. Disable it with `PI_SKIP_VERSION_CHECK=1`. Disabling update checks only turns off this check.
-- **Install/update telemetry:** after first install or a changelog-detected update, sends an anonymous version ping to `https://pi.dev/api/report-install`. This setting also controls optional provider attribution headers for OpenRouter, Cloudflare, and direct NVIDIA NIM requests. Opt out by setting `enableInstallTelemetry` to `false` in `settings.json`, or by setting `PI_TELEMETRY=0`. This does not disable update checks; Pi may still contact `pi.dev` for the latest version unless update checks are disabled or offline mode is enabled.
-
-Use `--offline` or `PI_OFFLINE=1` to disable all startup network operations described here, including update checks, package update checks, and install/update telemetry.
+Use `--offline` or `PI_OFFLINE=1` to disable all startup network operations.
 
 ---
 
@@ -314,135 +380,13 @@ Use `--offline` or `PI_OFFLINE=1` to disable all startup network operations desc
 
 Pi loads `AGENTS.md` (or `CLAUDE.md`) at startup from:
 - `~/.pi/agent/AGENTS.md` (global)
-- Parent directories (walking up from cwd, only when the project is trusted)
-- Current directory (only when the project is trusted)
+- Current directory and parent directories (only when the project is trusted)
 
-Use for project instructions (`AGENTS.md`/`CLAUDE.md`), conventions, common commands. All matching files are concatenated.
+Use for project instructions, conventions, and common commands. All matching files are concatenated.
 
-Disable context file loading with `--no-context-files` (or `-nc`).
+Replace the default system prompt with `.pi/SYSTEM.md` or `~/.pi/agent/SYSTEM.md`. Append without replacing via `APPEND_SYSTEM.md`.
 
-### System Prompt
-
-Replace the default system prompt with `.pi/SYSTEM.md` (project) or `~/.pi/agent/SYSTEM.md` (global). Append without replacing via `APPEND_SYSTEM.md`.
-
----
-
-## Customization
-
-### Prompt Templates
-
-Reusable prompts as Markdown files. Type `/name` to expand.
-
-```markdown
-<!-- ~/.pi/agent/prompts/review.md -->
-Review this code for bugs, security issues, and performance problems.
-Focus on: {{focus}}
-```
-
-Place in `~/.pi/agent/prompts/`, `.pi/prompts/`, or a [pi package](#pi-packages) to share with others. See [docs/prompt-templates.md](docs/prompt-templates.md).
-
-### Skills
-
-On-demand capability packages following the [Agent Skills standard](https://agentskills.io). Invoke via `/skill:name` or let the agent load them automatically.
-
-```markdown
-<!-- ~/.pi/agent/skills/my-skill/SKILL.md -->
-# My Skill
-Use this skill when the user asks about X.
-
-## Steps
-1. Do this
-2. Then that
-```
-
-Place in `~/.pi/agent/skills/`, `~/.agents/skills/`, `.pi/skills/`, or `.agents/skills/` (from `cwd` up through parent directories) or a [pi package](#pi-packages) to share with others. See [docs/skills.md](docs/skills.md).
-
-### Extensions
-
-<p align="center"><img src="docs/images/doom-extension.png" alt="Doom Extension" width="600"></p>
-
-TypeScript modules that extend pi with custom tools, commands, keyboard shortcuts, event handlers, and UI components.
-
-```typescript
-export default function (pi: ExtensionAPI) {
-  pi.registerTool({ name: "deploy", ... });
-  pi.registerCommand("stats", { ... });
-  pi.on("tool_call", async (event, ctx) => { ... });
-}
-```
-
-The default export can also be `async`. pi waits for async extension factories before startup continues, which is useful for one-time initialization such as fetching remote model lists before calling `pi.registerProvider()`.
-
-**What's possible:**
-- Custom tools (or replace built-in tools entirely)
-- Sub-agents and plan mode
-- Custom compaction and summarization
-- Permission gates and path protection
-- Custom editors and UI components
-- Status lines, headers, footers
-- Git checkpointing and auto-commit
-- SSH and sandbox execution
-- MCP server integration
-- Make pi look like Claude Code
-- Games while waiting (yes, Doom runs)
-- ...anything you can dream up
-
-Place in `~/.pi/agent/extensions/`, `.pi/extensions/`, or a [pi package](#pi-packages) to share with others. See [docs/extensions.md](docs/extensions.md) and [examples/extensions/](examples/extensions/).
-
-### Themes
-
-Built-in: `dark`, `light`. Themes hot-reload: modify the active theme file and pi immediately applies changes.
-
-Place in `~/.pi/agent/themes/`, `.pi/themes/`, or a [pi package](#pi-packages) to share with others. See [docs/themes.md](docs/themes.md).
-
-### Pi Packages
-
-Bundle and share extensions, skills, prompts, and themes via npm or git. Find packages on [npmjs.com](https://www.npmjs.com/search?q=keywords%3Api-package) or [Discord](https://discord.com/channels/1456806362351669492/1457744485428629628).
-
-> **Security:** Pi packages run with full system access. Extensions execute arbitrary code, and skills can instruct the model to perform any action including running executables. Review source code before installing third-party packages.
-
-```bash
-pi install npm:@foo/pi-tools
-pi install npm:@foo/pi-tools@1.2.3      # pinned version
-pi install git:github.com/user/repo
-pi install git:github.com/user/repo@v1  # tag or commit
-pi install git:git@github.com:user/repo
-pi install git:git@github.com:user/repo@v1  # tag or commit
-pi install https://github.com/user/repo
-pi install https://github.com/user/repo@v1      # tag or commit
-pi install ssh://git@github.com/user/repo
-pi install ssh://git@github.com/user/repo@v1    # tag or commit
-pi remove npm:@foo/pi-tools
-pi uninstall npm:@foo/pi-tools          # alias for remove
-pi list
-pi update                               # update pi and packages (skips pinned packages)
-pi update --extensions                  # update packages only
-pi update --self                        # update pi only
-pi update --self --force                # reinstall pi even if current
-pi update npm:@foo/pi-tools             # update one package
-pi config                               # enable/disable extensions, skills, prompts, themes
-```
-
-Packages install to `~/.pi/agent/git/` (git) or `~/.pi/agent/npm/` (npm). Use `-l` for project-local installs (`.pi/git/`, `.pi/npm/`). Git `@ref` values are pinned tags or commits; pinned packages are skipped by `pi update`, so use `pi install git:host/user/repo@new-ref` to move an existing package to a new ref. Git packages install dependencies with `npm install --omit=dev` by default, so runtime deps must be listed under `dependencies`; when `npmCommand` is configured, git packages use plain `install` for compatibility with wrappers. If you use a Node version manager and want package installs to reuse a stable npm context, set `npmCommand` in `settings.json`, for example `["mise", "exec", "node@20", "--", "npm"]`.
-
-Create a package by adding a `pi` key to `package.json`:
-
-```json
-{
-  "name": "my-pi-package",
-  "keywords": ["pi-package"],
-  "pi": {
-    "extensions": ["./extensions"],
-    "skills": ["./skills"],
-    "prompts": ["./prompts"],
-    "themes": ["./themes"]
-  }
-}
-```
-
-Without a `pi` manifest, pi auto-discovers from conventional directories (`extensions/`, `skills/`, `prompts/`, `themes/`).
-
-See [docs/packages.md](docs/packages.md).
+Disable with `--no-context-files` / `-nc`.
 
 ---
 
@@ -464,41 +408,17 @@ const { session } = await createAgentSession({
 await session.prompt("What files are in the current directory?");
 ```
 
-For advanced multi-session runtime replacement, use `createAgentSessionRuntime()` and `AgentSessionRuntime`.
-
-See [docs/sdk.md](docs/sdk.md) and [examples/sdk/](examples/sdk/).
+For advanced multi-session runtime, use `createAgentSessionRuntime()` and `AgentSessionRuntime`. See [docs/sdk.md](docs/sdk.md) and [examples/sdk/](examples/sdk/).
 
 ### RPC Mode
 
-For non-Node.js integrations, use RPC mode over stdin/stdout:
+For non-Node.js integrations:
 
 ```bash
 pi --mode rpc
 ```
 
-RPC mode uses strict LF-delimited JSONL framing. Clients must split records on `\n` only. Do not use generic line readers like Node `readline`, which also split on Unicode separators inside JSON payloads.
-
-See [docs/rpc.md](docs/rpc.md) for the protocol.
-
----
-
-## Philosophy
-
-Pi is aggressively extensible so it doesn't have to dictate your workflow. Features that other tools bake in can be built with [extensions](#extensions), [skills](#skills), or installed from third-party [pi packages](#pi-packages). This keeps the core minimal while letting you shape pi to fit how you work.
-
-**No MCP.** Build CLI tools with READMEs (see [Skills](#skills)), or build an extension that adds MCP support. [Why?](https://mariozechner.at/posts/2025-11-02-what-if-you-dont-need-mcp/)
-
-**No sub-agents.** There's many ways to do this. Spawn pi instances via tmux, or build your own with [extensions](#extensions), or install a package that does it your way.
-
-**No permission popups.** Run in a container, or build your own confirmation flow with [extensions](#extensions) inline with your environment and security requirements.
-
-**No plan mode.** Write plans to files, or build it with [extensions](#extensions), or install a package.
-
-**No built-in to-dos.** They confuse models. Use a TODO.md file, or build your own with [extensions](#extensions).
-
-**No background bash.** Use tmux. Full observability, direct interaction.
-
-Read the [blog post](https://mariozechner.at/posts/2025-11-30-pi-coding-agent/) for the full rationale.
+Strict LF-delimited JSONL over stdin/stdout. See [docs/rpc.md](docs/rpc.md) and [docs/json.md](docs/json.md).
 
 ---
 
@@ -508,47 +428,24 @@ Read the [blog post](https://mariozechner.at/posts/2025-11-30-pi-coding-agent/) 
 pi [options] [@files...] [messages...]
 ```
 
-### Package Commands
-
-```bash
-pi install <source> [-l]     # Install package, -l for project-local
-pi remove <source> [-l]      # Remove package
-pi uninstall <source> [-l]   # Alias for remove
-pi update [source|self|pi]   # Update pi and packages (skips pinned packages)
-pi update --extensions       # Update packages only
-pi update --self             # Update pi only
-pi update --self --force     # Reinstall pi even if current
-pi update --extension <src>  # Update one package
-pi list                      # List installed packages
-pi config                    # Enable/disable package resources
-```
-
-Project package commands accept `--approve`/`--no-approve` to trust or ignore project-local package settings for one command.
-
 ### Modes
 
 | Flag | Description |
 |------|-------------|
-| (default) | Interactive mode |
+| (no flag) | Interactive mode |
 | `-p`, `--print` | Print response and exit |
-| `--mode json` | Output all events as JSON lines (see [docs/json.md](docs/json.md)) |
-| `--mode rpc` | RPC mode for process integration (see [docs/rpc.md](docs/rpc.md)) |
+| `--mode json` | Output all events as JSON lines |
+| `--mode rpc` | RPC mode for process integration |
 | `--export <in> [out]` | Export session to HTML |
-
-In print mode, pi also reads piped stdin and merges it into the initial prompt:
-
-```bash
-cat README.md | pi -p "Summarize this text"
-```
 
 ### Model Options
 
 | Option | Description |
 |--------|-------------|
-| `--provider <name>` | Provider (anthropic, openai, google, etc.) |
-| `--model <pattern>` | Model pattern or ID (supports `provider/id` and optional `:<thinking>`) |
+| `--provider <name>` | Provider (anthropic, openai, google, ...) |
+| `--model <pattern>` | Model pattern or ID (supports `provider/id` and `:<thinking>`) |
 | `--api-key <key>` | API key (overrides env vars) |
-| `--thinking <level>` | `off`, `minimal`, `low`, `medium`, `high`, `xhigh` |
+| `--thinking <level>` | off, minimal, low, medium, high, xhigh |
 | `--models <patterns>` | Comma-separated patterns for Ctrl+P cycling |
 | `--list-models [search]` | List available models |
 
@@ -559,19 +456,19 @@ cat README.md | pi -p "Summarize this text"
 | `-c`, `--continue` | Continue most recent session |
 | `-r`, `--resume` | Browse and select session |
 | `--session <path\|id>` | Use specific session file or partial UUID |
-| `--fork <path\|id>` | Fork specific session file or partial UUID into a new session |
+| `--fork <path\|id>` | Fork a session into a new session |
 | `--session-dir <dir>` | Custom session storage directory |
 | `--no-session` | Ephemeral mode (don't save) |
-| `--name <name>`, `-n <name>` | Set session display name at startup |
+| `--name <name>`, `-n <name>` | Set session display name |
 
 ### Tool Options
 
 | Option | Description |
 |--------|-------------|
-| `--tools <list>`, `-t <list>` | Allowlist specific tool names across built-in, extension, and custom tools |
-| `--exclude-tools <list>`, `-xt <list>` | Disable specific tool names across built-in, extension, and custom tools |
-| `--no-builtin-tools`, `-nbt` | Disable built-in tools by default but keep extension/custom tools enabled |
-| `--no-tools`, `-nt` | Disable all tools by default |
+| `--tools <list>`, `-t <list>` | Allowlist specific tool names |
+| `--exclude-tools <list>`, `-xt <list>` | Disable specific tool names |
+| `--no-builtin-tools`, `-nbt` | Disable built-in tools, keep extension tools |
+| `--no-tools`, `-nt` | Disable all tools |
 
 Available built-in tools: `read`, `bash`, `edit`, `write`, `grep`, `find`, `ls`
 
@@ -579,7 +476,7 @@ Available built-in tools: `read`, `bash`, `edit`, `write`, `grep`, `find`, `ls`
 
 | Option | Description |
 |--------|-------------|
-| `-e`, `--extension <source>` | Load extension from path, npm, or git (repeatable) |
+| `-e`, `--extension <source>` | Load extension (repeatable) |
 | `--no-extensions` | Disable extension discovery |
 | `--skill <path>` | Load skill (repeatable) |
 | `--no-skills` | Disable skill discovery |
@@ -587,15 +484,13 @@ Available built-in tools: `read`, `bash`, `edit`, `write`, `grep`, `find`, `ls`
 | `--no-prompt-templates` | Disable prompt template discovery |
 | `--theme <path>` | Load theme (repeatable) |
 | `--no-themes` | Disable theme discovery |
-| `--no-context-files`, `-nc` | Disable AGENTS.md and CLAUDE.md context file discovery |
-
-Combine `--no-*` with explicit flags to load exactly what you need, ignoring settings.json (e.g., `--no-extensions -e ./my-ext.ts`).
+| `--no-context-files`, `-nc` | Disable AGENTS.md/CLAUDE.md discovery |
 
 ### Other Options
 
 | Option | Description |
 |--------|-------------|
-| `--system-prompt <text>` | Replace default prompt (context files and skills still appended) |
+| `--system-prompt <text>` | Replace default system prompt |
 | `--append-system-prompt <text>` | Append to system prompt |
 | `--verbose` | Force verbose startup |
 | `-a`, `--approve` | Trust project-local files for this run |
@@ -603,14 +498,17 @@ Combine `--no-*` with explicit flags to load exactly what you need, ignoring set
 | `-h`, `--help` | Show help |
 | `-v`, `--version` | Show version |
 
-### File Arguments
-
-Prefix files with `@` to include in the message:
+### Package Commands
 
 ```bash
-pi @prompt.md "Answer this"
-pi -p @screenshot.png "What's in this image?"
-pi @code.ts @test.ts "Review these files"
+pi install <source> [-l]   # Install package (-l for project-local)
+pi remove <source>         # Remove package
+pi uninstall <source>      # Alias for remove
+pi list                    # List installed packages
+pi update                  # Update pi and packages
+pi update --self           # Update pi only
+pi update --self --force   # Reinstall even if current
+pi config                  # Enable/disable package resources
 ```
 
 ### Examples
@@ -622,32 +520,26 @@ pi "List all .ts files in src/"
 # Non-interactive
 pi -p "Summarize this codebase"
 
-# Non-interactive with piped stdin
+# With piped stdin
 cat README.md | pi -p "Summarize this text"
 
 # Named one-shot session
 pi --name "release audit" -p "Audit this repository"
 
-# Different model
-pi --provider openai --model gpt-4o "Help me refactor"
-
-# Model with provider prefix (no --provider needed)
+# Specific model
 pi --model openai/gpt-4o "Help me refactor"
 
 # Model with thinking level shorthand
 pi --model sonnet:high "Solve this complex problem"
 
-# Limit model cycling
-pi --models "claude-*,gpt-4o"
-
 # Read-only mode
 pi --tools read,grep,find,ls -p "Review the code"
 
-# Disable one extension or built-in tool while keeping the rest available
+# Disable a specific tool
 pi --exclude-tools ask_question
 
-# High thinking level
-pi --thinking high "Solve this complex problem"
+# Reference files with @ prefix
+pi @src/main.ts @src/main.test.ts "Review these together"
 ```
 
 ### Environment Variables
@@ -655,19 +547,92 @@ pi --thinking high "Solve this complex problem"
 | Variable | Description |
 |----------|-------------|
 | `PI_CODING_AGENT_DIR` | Override config directory (default: `~/.pi/agent`) |
-| `PI_CODING_AGENT_SESSION_DIR` | Override session storage directory (overridden by `--session-dir`) |
-| `PI_PACKAGE_DIR` | Override package directory (useful for Nix/Guix where store paths tokenize poorly) |
-| `PI_OFFLINE` | Disable startup network operations, including update checks, package update checks, and install/update telemetry |
-| `PI_SKIP_VERSION_CHECK` | Skip the Pi version update check at startup. This prevents the `pi.dev` latest-version request |
-| `PI_TELEMETRY` | Override install/update telemetry and provider attribution headers. Use `1`/`true`/`yes` to enable or `0`/`false`/`no` to disable. This does not disable update checks |
-| `PI_CACHE_RETENTION` | Set to `long` for extended prompt cache (Anthropic: 1h, OpenAI: 24h) |
+| `PI_CODING_AGENT_SESSION_DIR` | Override session storage directory |
+| `PI_PACKAGE_DIR` | Override package directory (Nix/Guix) |
+| `PI_OFFLINE` | Disable all startup network operations |
+| `PI_SKIP_VERSION_CHECK` | Skip version update check |
+| `PI_TELEMETRY` | Override install telemetry (`0`/`false` to disable) |
+| `PI_CACHE_RETENTION` | Set to `long` for extended prompt cache |
 | `VISUAL`, `EDITOR` | External editor for Ctrl+G |
+| `ANTHROPIC_API_KEY` | Anthropic API key |
+| `OPENAI_API_KEY` | OpenAI API key |
+| `GEMINI_API_KEY` | Google Gemini API key |
+| `DEEPSEEK_API_KEY` | DeepSeek API key |
+| (and 20+ more provider keys) | See [docs/providers.md](docs/providers.md) |
 
 ---
 
-## Contributing & Development
+## Philosophy
 
-See [CONTRIBUTING.md](../../CONTRIBUTING.md) for guidelines and [docs/development.md](docs/development.md) for setup, forking, and debugging.
+Pi is aggressively extensible so it doesn't have to dictate your workflow. Features that other tools bake in can be built with extensions, skills, or installed from third-party pi packages. This keeps the core minimal while letting you shape pi to fit how you work.
+
+- **No MCP** — build CLI tools with READMEs or an extension that adds MCP support. [Why?](https://mariozechner.at/posts/2025-11-02-what-if-you-dont-need-mcp/)
+- **No sub-agents** — spawn pi instances via tmux, or build your own with extensions
+- **No permission popups** — run in a container, or build your own confirmation flow with extensions
+- **No plan mode** — write plans to files, or build it with extensions
+- **No built-in to-dos** — they confuse models. Use a TODO.md file, or build your own
+- **No background bash** — use tmux. Full observability, direct interaction
+
+Read the [blog post](https://mariozechner.at/posts/2025-11-30-pi-coding-agent/) for the full rationale.
+
+---
+
+## Testing
+
+```bash
+npm test                              # Run all tests (vitest --run)
+node ../../node_modules/vitest/dist/cli.js --run test/specific.test.ts   # Single test
+```
+
+Suite tests use `test/suite/harness.ts` with `FauxProvider` from `@earendil-works/pi-ai` — no real API keys needed. Regression tests go in `test/suite/regressions/<issue-number>-<short-slug>.test.ts`.
+
+**Warning**: Never run `vitest --run` from the monorepo root. It includes e2e tests that activate when endpoint/auth env vars are present. Use `./test.sh` from the root instead.
+
+Full quality pipeline (`npm run check` from repo root):
+1. Biome lint + format
+2. Pinned deps check
+3. TypeScript import extension check
+4. Shrinkwrap verification
+5. `tsgo --noEmit` type check
+6. Browser smoke test
+
+See [docs/development.md](docs/development.md) for detailed development setup.
+
+---
+
+## Supply Chain Hardening
+
+Pi treats npm dependency changes as reviewed code changes:
+
+- Direct external dependencies are pinned to exact versions
+- `npm ci --ignore-scripts` for installs — no lifecycle scripts run
+- Pre-commit blocks lockfile commits unless `PI_ALLOW_LOCKFILE_CHANGE=1`
+- Published CLI includes `npm-shrinkwrap.json` pinning transitive deps
+- Scheduled GitHub workflow runs `npm audit --omit=dev` and signature verification
+- New deps with lifecycle scripts require explicit allowlist review
+
+---
+
+## What's New
+
+**v0.78.1** -- Project trust gating for local settings, resources, and instructions. Prompt cache hit rate in interactive footer. Ant Ling and NVIDIA NIM provider support. MiniMax-M3 models.
+
+**v0.78.0** -- Named startup sessions (`--name` / `-n`). `--exclude-tools` / `-xt` to disable specific tools. Clickable OSC 8 file hyperlinks in built-in file tool titles. OpenAI Codex device-code login.
+
+**v0.77.0** -- Claude Opus 4.8 support. Streaming-aware extension input events. Improved multi-model reasoning compatibility.
+
+Full changelog: [CHANGELOG.md](CHANGELOG.md)
+
+---
+
+## Contributing
+
+See [CONTRIBUTING.md](../../CONTRIBUTING.md) for guidelines. Key points:
+
+- **Quality bar**: `npm run check` and `./test.sh` must pass before PR
+- **Approval**: Issues and PRs from new contributors are auto-closed. Maintainers review and re-open. `lgtm` grants PR rights.
+- **Core minimalism**: If your feature doesn't belong in the core, make it an extension. PRs that bloat the core are likely rejected.
+- **Development**: `npm install --ignore-scripts && npm run build && ./pi-test.sh` to run from source.
 
 ---
 
@@ -677,6 +642,7 @@ MIT
 
 ## See Also
 
-- [@earendil-works/pi-ai](https://www.npmjs.com/package/@earendil-works/pi-ai): Core LLM toolkit
-- [@earendil-works/pi-agent-core](https://www.npmjs.com/package/@earendil-works/pi-agent-core): Agent framework
-- [@earendil-works/pi-tui](https://www.npmjs.com/package/@earendil-works/pi-tui): Terminal UI components
+- [@earendil-works/pi-ai](https://www.npmjs.com/package/@earendil-works/pi-ai) — Core LLM toolkit
+- [@earendil-works/pi-agent-core](https://www.npmjs.com/package/@earendil-works/pi-agent-core) — Agent framework
+- [@earendil-works/pi-tui](https://www.npmjs.com/package/@earendil-works/pi-tui) — Terminal UI components
+- [openclaw/openclaw](https://github.com/openclaw/openclaw) — Real-world SDK integration
