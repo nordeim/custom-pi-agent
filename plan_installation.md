@@ -566,3 +566,20 @@ Format: YAML frontmatter + markdown body, consistent with existing pi skills (cl
   
 Location: Discoverable by pi alongside other system skills.
 
+
+The usage guide has been created and verified. It is 419 lines (10,515 bytes) and covers all 8 sections requested by the user.  
+
+Usage guide created at /home/project/pi-agent/packages/coding-agent/ava-agent_usage_guide.md (419 lines, 10.5 KB).  
+  
+Sections covered:  
+1. Activating the Extension — Auto-load verification and manual force-load  
+2. audit-ui Tool — Natural language and explicit invocation, parameters, expected output, security constraints  
+3. reflect-session Tool — Session file lookup, leafId parameter, ADR output format  
+4. /avant-garde Command — How to invoke, what it enforces, session-scoped behavior  
+5. brutalist Theme — Activation via /theme CLI and in-session command, color palette, deactivation  
+6. scaffold-ui Skill — Automatic enforcement on component generation, rule constraints, generated example  
+7. Complete Workflow — 5-step session from theme startup through audit to ADR review  
+8. Troubleshooting — 5 common issues (tool not found, theme not applied, command not found, false negatives, missing session file) with diagnosis and fixes  
+  
+Quick Reference Table included at the end for all 5 features.
+
