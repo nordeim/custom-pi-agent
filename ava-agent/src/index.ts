@@ -13,7 +13,7 @@ export default async function (pi: ExtensionAPI) {
 - Banned Tailwind classes: rounded-*, shadow-*, bg-gradient-*.
 These constraints must survive compaction.`,
     };
-    event.messages.push(constraintMessage);
+    (event.messages as unknown[]).push(constraintMessage);
   });
 
   pi.registerTool({
@@ -52,11 +52,12 @@ These constraints must survive compaction.`,
     },
   });
 
-  pi.registerMessageRenderer('ava-brutalist', (message, options, theme) => {
-    if (message.role === 'assistant' && message.content) {
+  pi.registerMessageRenderer('ava-brutalist', (message, _options, _theme) => {
+    const msg = message as unknown as { content?: string };
+    if (msg.content) {
       const border = '\x1b[90m┌─ AVA OUTPUT ────────────────────────────────────────\x1b[0m';
       const footer = '\x1b[90m└──────────────────────────────────────────────────────\x1b[0m';
-      return `${border}\n${message.content}\n${footer}` as any;
+      return `${border}\n${msg.content}\n${footer}` as any;
     }
     return undefined;
   });

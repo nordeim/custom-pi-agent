@@ -1,0 +1,4 @@
+{"id":"root","parentId":null,"type":"message","timestamp":"2025-01-01T00:00:00.000Z","message":{"role":"user","content":"Start"}}
+{"id":"comp1","parentId":"root","type":"compaction","timestamp":"2025-01-01T00:01:00.000Z","summary":"# Constraints\n- Use strict TS\n\n# Key Decisions\n- Use vitest"}
+{"id":"msg1","parentId":"comp1","type":"message","timestamp":"2025-01-01T00:02:00.000Z","message":{"role":"assistant","content":"Hello"}}
+{"id":"comp2","parentId":"msg1","type":"compaction","timestamp":"2025-01-01T00:03:00.000Z","summary":"# Constraints\n- No any\n\n# Key Decisions\n- Extension-only"}

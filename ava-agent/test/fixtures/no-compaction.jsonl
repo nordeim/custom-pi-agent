@@ -1,0 +1,2 @@
+{"id":"root","parentId":null,"type":"message","timestamp":"2025-01-01T00:00:00.000Z","message":{"role":"user","content":"Start"}}
+{"id":"msg1","parentId":"root","type":"message","timestamp":"2025-01-01T00:00:01.000Z","message":{"role":"assistant","content":"Hello"}}

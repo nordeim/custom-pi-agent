@@ -67,4 +67,16 @@ describe('executeAuditUi', () => {
     await executeAuditUi('call-1', { targetPath: 'test.tsx' }, undefined, onUpdate, createMockContext());
     expect(onUpdate).toHaveBeenCalledWith(expect.any(Object));
   });
+
+  it('throws when signal is aborted', async () => {
+    vi.mocked(runAstAudit).mockReturnValue({
+      filePath: 'test.tsx',
+      violations: [],
+      isCompliant: true,
+    });
+    const controller = new AbortController();
+    controller.abort();
+    await expect(executeAuditUi('call-1', { targetPath: 'test.tsx' }, controller.signal, undefined, createMockContext()))
+      .rejects.toThrow('Aborted');
+  });
 });

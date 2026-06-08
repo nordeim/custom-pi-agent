@@ -82,9 +82,13 @@ export class SessionGraph {
     const path: SessionNode[] = [];
     let currentId: string | null = leafId;
 
+    const visited = new Set<string>();
+
     while (currentId) {
+      if (visited.has(currentId)) break;
       const node = this.nodes.get(currentId);
       if (!node) break;
+      visited.add(currentId);
       path.unshift(node);
       currentId = node.parentId;
     }

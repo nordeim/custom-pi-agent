@@ -10,12 +10,11 @@ export async function executeAuditUi(
   onUpdate: ((partialResult: AgentToolResult<unknown>) => void) | undefined,
   ctx: ExtensionContext,
 ): Promise<AgentToolResult<unknown>> {
-  const { targetPath: targetPath } = params;
+  const { targetPath } = params;
 
-  onUpdate?.({
-    content: [{ type: "text", text: `Initializing AST auditor for ${targetPath}...` }],
-    details: {},
-  });
+  if (signal?.aborted) {
+    throw new Error('Aborted: Audit-UI tool was cancelled before completion.');
+  }
 
   const workspaceRoot = ctx.cwd || process.cwd();
   const resolvedPath = path.resolve(workspaceRoot, targetPath);
