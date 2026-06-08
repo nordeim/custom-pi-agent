@@ -953,3 +953,46 @@ The remediation followed the TDD plan across all phases:
   npx tsc --noEmit  # zero errors  
 ```  
 
+All three documentation files are created, tests pass, TypeScript compiles clean. Let me provide a summary of what was done.  
+
+All three documentation files created, verified, and aligned with the implementation.  
+  
+### Documentation Summary  
+  
+┌───────────┬───────┬─────────────────────────────────────────────────────────────────────────────────────┐  
+│ File      │ Lines │ Purpose                                                                             │  
+├───────────┼───────┼─────────────────────────────────────────────────────────────────────────────────────┤  
+│ README.md │ 96    │ Installation, usage, API reference, test matrix, known limitations                  │  
+├───────────┼───────┼─────────────────────────────────────────────────────────────────────────────────────┤  
+│ CLAUDE.md │ 106   │ Architecture, coding conventions, ExtensionAPI patterns, gotchas, common tasks      │  
+├───────────┼───────┼─────────────────────────────────────────────────────────────────────────────────────┤  
+│ AGENTS.md │ 87    │ Issues fixed with root causes, troubleshooting, lessons learned, outstanding issues │  
+└───────────┴───────┴─────────────────────────────────────────────────────────────────────────────────────┘  
+  
+### Key Documentation Highlights  
+  
+README.md  
+- Clear installation and usage instructions  
+- Full API reference for both tools (audit-ui, reflect-session)  
+- Test matrix showing 30/30 tests across 5 test files  
+- Known limitations section with renderCall/renderResult type gap documented  
+  
+CLAUDE.md  
+- ExtensionAPI usage patterns with code examples  
+- (event.messages as unknown[]).push(...) pattern for system message injection  
+- Structural access pattern for message renderer: (message as unknown as { content?: string }).content  
+- Testing strategy: pure utilities → mocked tools → mocked ExtensionAPI integration  
+  
+AGENTS.md  
+- 5 issues fixed with symptoms, root causes, fixes, and "what not to do"  
+- 6 gotchas in table format for quick reference  
+- Troubleshooting section for ENOENT, rootDir, mock paths, registration failures  
+- 4 lessons learned from the remediation process  
+- 4 outstanding issues with impact assessment  
+- Recommendations for version pinning, pre-commit hooks, E2E tests  
+  
+### Verified  
+  
+- npx vitest run: 30/30 tests passing (5 files)  
+- npx tsc --noEmit: zero TypeScript errors 
+
