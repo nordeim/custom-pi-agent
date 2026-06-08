@@ -1,0 +1,4 @@
+{"type":"message","id":"root","parentId":null,"timestamp":"2025-01-01T00:00:00.000Z","message":{"role":"user","content":"Start session"}}
+{"type":"message","id":"msg1","parentId":"root","timestamp":"2025-01-01T00:00:01.000Z","message":{"role":"assistant","content":"Hello"}}
+{"type":"compaction","id":"comp1","parentId":"msg1","timestamp":"2025-01-01T00:00:02.000Z","summary":"# Constraints\n- Use TypeScript strict\n- No any\n\n# Key Decisions\n- Use vitest for testing\n- Extension-only architecture"}
+{"type":"message","id":"msg2","parentId":"comp1","timestamp":"2025-01-01T00:00:03.000Z","message":{"role":"user","content":"Continue"}}

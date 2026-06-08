@@ -1,0 +1,25 @@
+{
+  "name": "ava-agent",
+  "version": "0.1.0",
+  "description": "AVA — Avant-Garde Visual Auditor for pi-coding-agent",
+  "type": "module",
+  "scripts": {
+    "test": "vitest --run",
+    "watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@earendil-works/pi-coding-agent": "^0.78.1",
+    "ts-morph": "^28.0.0",
+    "typebox": "^1.1.38",
+    "vitest": "^4.1.8"
+  },
+  "devDependencies": {
+    "@earendil-works/pi-agent-core": "^0.78.1",
+    "@earendil-works/pi-ai": "^0.78.1",
+    "@earendil-works/pi-tui": "^0.78.1",
+    "@types/node": "^24.13.1",
+    "typescript": "^5.9.3"
+  },
+  "license": "MIT"
+}
